@@ -1,0 +1,57 @@
+<%- include ../layouts/header.ejs %>
+
+<% if (messages.error) { %>
+	<p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+	<p style="color:green"><%- messages.success %></p>
+<% } %>	
+
+<table class="table" >
+
+	<tr class="tr">
+		<th>Name</th>
+		<th>Age</th>
+		<th>Email</th>
+		<th>Action</th>
+	</tr>
+
+	<% if (data) { %>
+	<% data.forEach(function(user){ %>
+		<tr>
+			<td style="text-align: center;"><%= user.name %></td>
+			<td style="text-align: center;"><%= user.age %></td>
+			<td style="text-align: center;"><%= user.email %></td>
+			<td>
+				<div style="text-align: center;">
+					<a href='/users/edit/<%= user._id %>'> <button>EDIT</button></a> &nbsp;							
+					<form method="post" action="/users/delete/<%= user._id %>" style="margin-top: 10px;">
+						<input type="submit" name="delete" value='DELETE' onClick="return confirm('Are you sure you want to delete?')" />
+						<input type="hidden" name="_method" value="DELETE" />
+					</form>
+				</div>
+			</td>
+		</tr>
+	<% }) %>
+	<% } %>
+
+</table>
+
+<style>
+	.table {
+		margin-left: -7px;
+    margin-right: -9px;
+		height: -webkit-fill-available;
+		padding-top: 20px;
+		width: -webkit-fill-available;
+		background-color: white;
+		margin-top: 10px;
+	}
+	.tr {
+		text-align: center;
+    background-color: #101053;
+    height: 10px;
+    color: white;
+	}
+</style>
