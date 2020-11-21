@@ -14,7 +14,7 @@ app.get('/', function(req, res, next) {
 		} else {
 			res.render('user/list', {
 				title: 'User List', 
-				data: resultx
+				data: result
 			})
 		}
 	})
